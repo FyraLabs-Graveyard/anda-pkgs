@@ -1,0 +1,5 @@
+releasever: [36, 35]
+basearch: x86_64
+priority:
+  - fedora
+  - ultramarine
