@@ -1,0 +1,3 @@
+name: Ultramarine $releasever - $basearch
+url: https://lapis.ultramarine-linux.org/pub/ultramarine/$releasever/Everything/$basearch/os/
+type: DNFRepo

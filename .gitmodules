@@ -1,0 +1,3 @@
+[submodule "ultramarine/umpkg"]
+	path = ultramarine/umpkg
+	url = git@github.com:Ultramarine-Linux/pkg-umpkg.git
