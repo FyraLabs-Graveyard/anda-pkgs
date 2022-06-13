@@ -1,0 +1,6 @@
+[aseprite]
+spec = "aseprite.spec"
+build_script = ""
+build_method = "rpmbuild"
+owner = "cappy"
+git_repo = "https://github.com/ultramarine-linux/aseprite"

@@ -1,0 +1,32 @@
+diff -Naur asperite/CMakeLists.txt aseprite-patched/CMakeLists.txt
+--- asperite/CMakeLists.txt	2022-06-03 00:33:32.000000000 +0700
++++ aseprite-patched/CMakeLists.txt	2022-06-13 14:11:36.209239833 +0700
+@@ -56,6 +56,7 @@
+ option(USE_SHARED_PIXMAN  "Use your installed copy of pixman" off)
+ option(USE_SHARED_FREETYPE "Use shared FreeType library" off)
+ option(USE_SHARED_HARFBUZZ "Use shared HarfBuzz library" off)
++option(USE_SHARED_WEBP    "Use your installed copy of webp" off)
+ option(ENABLE_ASEPRITE_EXE "Compile main Aseprite executable" on)
+ option(ENABLE_MEMLEAK      "Enable memory-leaks detector (only for developers)" off)
+ option(ENABLE_NEWS         "Enable the news in Home tab" on)
+@@ -230,9 +231,17 @@
+ 
+ # libwebp
+ if(ENABLE_WEBP)
+-  set(WEBP_LIBRARIES webp webpdemux libwebpmux)
+-  set(WEBP_INCLUDE_DIR ${LIBWEBP_DIR}/src)
+-  include_directories(${WEBP_INCLUDE_DIR})
++  if(USE_SHARED_WEBP)
++    find_library(WEBP_LIBRARY NAMES webp)
++    find_library(WEBPDEMUX_LIBRARY NAMES webpdemux)
++    find_library(WEBPMUX_LIBRARY NAMES webpmux)
++    set(WEBP_LIBRARIES ${WEBP_LIBRARY} ${WEBPDEMUX_LIBRARY} ${WEBPMUX_LIBRARY})
++    find_path(WEBP_INCLUDE_DIRS NAMES decode.h PATH_SUFFIXES webp)
++  else()
++    set(WEBP_LIBRARIES webp webpdemux libwebpmux)
++    set(WEBP_INCLUDE_DIR ${LIBWEBP_DIR}/src)
++    include_directories(${WEBP_INCLUDE_DIR})
++  endif()
+ endif()
+ 
+ # tinyxml
